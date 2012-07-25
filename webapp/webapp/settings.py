@@ -112,6 +112,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     "/Users/student/src/trewd/webapp/views",
+    "/home/wendy/geonote/webapp/main/templates"
     #/Users/student/src/trewd/env/lib/python2.7/site-packages/django
 )
 
@@ -126,7 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     #'django.contrib.admindocs',
-    'polls',
+    'main',
 )
 
 # A sample logging configuration. The only tangible logging
