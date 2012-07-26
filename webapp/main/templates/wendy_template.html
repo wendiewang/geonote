@@ -25,13 +25,15 @@
         left: 50%;  
         z-index: 1000;
         display: none;
-        }
+      }
       div#screen {
         position: fixed;
         z-index: 999;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.9);
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
         display: none;
       }
     </style>
@@ -57,12 +59,12 @@
       function placeMarker(location) {
         marker = new google.maps.Marker({
           position: location,
-          map: map
+          map: map,
         })
         google.maps.event.addListener(marker, 'click', function() {
             show_lightbox();
         });
-      };
+      }
       function show_lightbox() {
         $("div#lightbox").show();
         $("div#screen").show();
@@ -80,7 +82,9 @@
   </head>
   <body onload="initialize()"> <!-- document object model window.onload -->  
     <div id="map_canvas" style="width:100%; height:100%"></div>
-    <div id="lightbox"> I AM A LIGHTBOX <a id="xclose" href="">[x]</a></div>
+    <div id="lightbox"> {{ post.title }} {{ post.body }}
+      <a id="xclose" href="">[x]</a>
+    </div>
     <div id="screen"> </div>
   </body>
   
