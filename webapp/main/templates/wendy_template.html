@@ -3,26 +3,83 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map_canvas { height: 100% }
+      html { 
+        height: 100% 
+      }
+      body { 
+        height: 100%; 
+        margin: 0 auto 0 auto; 
+        width: 1060px;
+        padding: 0;
+        z-index: 1;
+      }
+      div#map_canvas { 
+        height: 100% 
+      }
+      div#lightbox {
+        position: fixed;
+        width: 400px;
+        min-height: 400px;
+        background-color: #FFF8DC;
+        top: 100px;
+        left: 50%;  
+        margin-left: -200px;
+        z-index: 1000;
+        display: none;
+        }
+      div#screen {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+      }
     </style>
     <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDFYRAM772sUm9kQtUa73mfBuxYXs8T9n0&sensor=false">
-    </script>
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDFYRAM772sUm9kQtUa73mfBuxYXs8T9n0&sensor=false"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript">
+      var map;
+      var marker;
       function initialize() {
+        var myLatlng = new google.maps.LatLng(37.751, -122.433);
         var mapOptions = {
-          center: new google.maps.LatLng(37.775, -122.418),
           zoom: 13,
+          center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
+        }
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        google.maps.event.addListener(map, 'click', function(event) {
+          placeMarker(event.latLng);
+        });
       }
+      function placeMarker(location) {
+        marker = new google.maps.Marker({
+          position: location,
+          map: map
+        })
+      };
+      function show_lightbox() {
+        $("div#lightbox").show();
+        $("div#screen").show();
+      };
+      function hide_lightbox() {
+        $("div#lightbox").hide();
+        $("div#screen").hide();
+        return false;
+      };
+      $(document).ready(function(){
+        $("a#marker").click(show_lightbox);
+        $("a#xclose").click(hide_lightbox);
+      });
     </script>
+
   </head>
-  <body onload="initialize()">
+  <body onload="initialize()"> <!-- document object model window.onload -->  
     <div id="map_canvas" style="width:100%; height:100%"></div>
+    <div id="page"><a id="marker">clickme</a></div>
+    <div id="lightbox"> I AM A LIGHTBOX <a id="xclose" href="">[x]</a></div>
+    <div id="screen"> </div>
   </body>
+  
 </html>
