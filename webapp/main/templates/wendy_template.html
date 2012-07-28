@@ -17,12 +17,12 @@
         height: 100% 
       }
       div#lightbox {
+        top: 15px;
         position: fixed;
-        width: 400px;
-        min-height: 400px;
+        width: 600px;
+        min-height: 200px;
         background-color: #FFF8DC;
-        top: 100px;
-        left: 50%;  
+        left: 30%;  
         z-index: 1000;
         display: none;
       }
@@ -85,6 +85,10 @@
 
   </head>
   <body onload="initialize()"> <!-- document object model window.onload -->  
+    <div id="navigation">
+      <div id="big map"></div>
+      <div id="leave a note"></div>
+    </div>
     <div id="map_canvas" style="width:100%; height:100%"></div>
 
     <div id="lightbox"> 
