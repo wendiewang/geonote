@@ -7,6 +7,8 @@ class Post(models.Model):
     title = models.CharField(max_length=60)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    lon = models.FloatField(max_length=10)
+    lat = models.FloatField(max_length=10)
 
     def __unicode__(self):
         return self.title

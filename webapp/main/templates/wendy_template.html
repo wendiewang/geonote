@@ -56,6 +56,13 @@
           placeMarker(event.latLng);
           show_lightbox();
         });
+        console.log(marks);
+        alert(marks[0]['fields']['lat']);
+        alert(marks[0]['fields']['lon'])
+        mark_latlng = new google.maps.LatLng(marks[0]['fields']['lat'], marks[0]['fields']['lon']);
+        console.log(mark_latlng);
+        placeMarker(mark_latlng);
+
       }
       function placeMarker(location) {
         var marker = new google.maps.Marker({
