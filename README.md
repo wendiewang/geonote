@@ -15,3 +15,7 @@ json
 mongodb geospatial
 
 http://api.mongodb.org/python/current/examples/geo.html#geospatial-indexing-example
+
+geopy
+
+http://code.google.com/p/geopy/
