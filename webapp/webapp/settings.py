@@ -21,6 +21,12 @@ DATABASES = {
     }
 }
 
+# SESSION_ENGINE = 'mango.session'
+# AUTHENTICATION_BACKENDS = ('mango.auth.Backend',)
+# MONGODB_HOST = 'ds035907.mongolab.com'  # enter your MongoDB hostname here
+# MONGODB_PORT = '35907'        # enter your MongoDB port here (None for default port)
+# MONGODB_NAME = 'geodb'       # enter your MongoDB database name here
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
