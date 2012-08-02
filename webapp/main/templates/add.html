@@ -1,2 +1,7 @@
-<p> <input type="text" name="title" id="title" />
-<p> <textarea name="description" id="description" cols="25" rows="5"> </textarea>
+<form action="/marks" method="post">
+	{% csrf_token %}
+	<p> title: <input type="text" name="title" id="title" />
+	<p> description: <p>
+	<textarea name="description" id="description" cols="25" rows="5"> </textarea>
+	<p><input type="submit" value="add a note" />
+</form>

@@ -92,6 +92,8 @@
     <script type="text/javascript">
       var map;
       var marknum = 0;
+      // json communicates data between python and javascript 
+      // list of dictionaries, each dictionary is a mark 
       var marks = jQuery.parseJSON('{{ posts|safe }}');
       function initialize() {
         var myLatlng = new google.maps.LatLng(37.751, -122.433);
@@ -100,30 +102,44 @@
           center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
+        // creates the map 
         map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        // creates new mark on map
         google.maps.event.addListener(map, 'click', function(event) {
           placeMarker(event.latLng);
-          show_lightbox();
+          show_postbox();
         });
         console.log(marks);
+        // updates map with all marks in database/json object 
         for (i=0; i<marks.length; i++) {
           mark_latlng = new google.maps.LatLng(marks[i]['fields']['lat'], marks[i]['fields']['lon']);
           console.log(mark_latlng);
-          placeMarker(mark_latlng);
+          placeMarker(mark_latlng, marks[i]['pk']);
         }
       }
-      function placeMarker(location) {
+      function placeMarker(location,pk) {
         var marker = new google.maps.Marker({
           position: location,
           map: map,
-        })
+        });
         google.maps.event.addListener(marker, 'click', function() {
-            show_lightbox();
+            show_lightbox(pk);
         });
       }
-      function show_lightbox() {
-        $("div#lb_title").html(marks[marknum]['fields']['title']);
-        $("div#lb_body").html(marks[marknum]['fields']['body']);
+      // matches pk of mark against the json object 
+      function lookup_mark(pk) {
+        for(var i=0;i<marks.length;i++) {
+          if (marks[i]['pk'] == pk) {
+            return marks[i];
+          }
+        }
+        // return nothing
+        return null;
+      }
+      function show_lightbox(pk) {
+        var mark = lookup_mark(pk);
+        $("div#lb_title").html(mark['fields']['title']);
+        $("div#lb_body").html(mark['fields']['body']);
         $("div#lightbox").show();
         marknum++;
         return false;
@@ -163,15 +179,15 @@
     <div id="lightbox"> 
       <div id="lb_title"></div>
       <div id="lb_body"></div>
-      
+      <a id="xclose" href="">[x]</a>
     </div>
     <div id="postnote"> 
       <a id="closepost" href="">[x]</a>
       <form action="/add/" method="post">
-        {{ form.as_p }}
+        <p> <input type="text" name="title" id="title" />
+        <p> <textarea name="description" id="description" cols="25" rows="5"> </textarea>
       <p><input type="submit" value="add a note" />
       </form>
-
     </div>
     <div id="bottom">
       <div id="footer">

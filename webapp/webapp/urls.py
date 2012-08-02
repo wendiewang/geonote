@@ -15,6 +15,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    # for the post
-    url(r'^post/', 'main.views.post', name='post'),
+    # for the post, use nouns
+    url(r'^marks', 'main.views.add', name='add'),
 )
