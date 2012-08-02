@@ -12,12 +12,16 @@
         padding: 0;
         z-index: 1;
       }
+      a {
+        text-decoration: none;
+      }
       div#top {
         width: 100%;
         background-color: #ccc;
       }
       div#header {
         width: 960px;
+        height: 30px;
         margin: 0 auto 0 auto; 
         background-color: #ccc;
         position: relative;
@@ -29,26 +33,37 @@
         margin-left: 200px;
         top: 0px;
         width: 100px;
-        position: fixed;
+        position: absolute;
+        z-index: 15;
       }
       div#note {
         margin-left: 300px;
         top: 0px;
         width: 100px;
-        position: fixed;
+        position: absolute;
       }
-      div#map_canvas { 
-        height: 95%;
-        width: 100%;
-      }
-      div#lightbox {
-        top: 15px;
-        position: fixed;
-        width: 600px;
+      div#postnote {
+        top: 20px;
+        position: absolute;
+        width: 400px;
         min-height: 200px;
         background-color: #FFF8DC;
         left: 30%;  
-        z-index: 1000;
+        z-index: 500;
+        display: none;
+      }
+      div#map_canvas { 
+        height: 92%;
+        width: 100%;
+      }
+      div#lightbox {
+        top: 20px;
+        position: fixed;
+        width: 600px;
+        min-height: 300px;
+        background-color: #FFF8DC;
+        left: 30%;  
+        z-index: 500;
         display: none;
       }
       /*div#screen {
@@ -111,34 +126,63 @@
         $("div#lb_body").html(marks[marknum]['fields']['body']);
         $("div#lightbox").show();
         marknum++;
+        return false;
       };
       function hide_lightbox() {
         $("div#lightbox").hide();
         return false;
       };
+      function show_postbox() {
+        $("div#postnote").show();
+        return false; // prevents page from refreshing 
+      };
+      function hide_postbox() {
+        $("div#postnote").hide();
+        return false; 
+      };
       $(document).ready(function(){
         $("a#xclose").click(hide_lightbox);
+        $("a#closepost").click(hide_postbox);
+        $("a#apostnote").click(show_postbox);
       });
     </script>
-
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+    <script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/wendiewang" data-format="hover" data-text="Wendie Wang" data-related="false"></script>
   </head>
+
   <body onload="initialize()"> <!-- document object model window.onload -->  
     <div id="top">
       <div id="header">
         <div id="logo">GEONOTE LOGO</div>
         <div id="bigmap">big map</div>
-        <div id="note">note</div>
+        <div id="note"><a id="apostnote" href="">note</a></div>
       </div>
     </div>
     <div id="map_canvas"></div>
     <div id="lightbox"> 
       <div id="lb_title"></div>
       <div id="lb_body"></div>
-      <a id="xclose" href="">[x]</a>
+      
     </div>
-    <div id="bottom"><div id="footer">
-      made by <a href="http://www.linkedin.com/in/wendiewang"> wendiewang </a>
-    </div></div>
+    <div id="postnote"> 
+      <a id="closepost" href="">[x]</a>
+      <form action="/add/" method="post">
+        {{ form.as_p }}
+      <p><input type="submit" value="add a note" />
+      </form>
+
+    </div>
+    <div id="bottom">
+      <div id="footer">
+        <div id="seo">
+          <a href="https://twitter.com/wendiewang" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @wendiewang</a>  
+        </div>
+        <div id="credit">
+          made by <a href="http://www.linkedin.com/in/wendiewang"> wendiewang </a> 
+        </div>
+      </div>
+    </div>
   </body>
   
 </html>
