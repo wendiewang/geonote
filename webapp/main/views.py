@@ -22,11 +22,11 @@ def add(request):
 	form = Post()
 	if request.method == 'POST': # If the form has been submitted...
 		form.title = request.POST['title']
-		form.description = request.POST['description']
-		form.lon = 0
-		form.lat = 0
+		form.body = request.POST['body']
+		form.lon = -122.433
+		form.lat = 37.751
 		form.save()
 		
-	return render(request, 'add.html', {
+	return render(request, 'wendy_template.html', {
 		'form': form,
 	})

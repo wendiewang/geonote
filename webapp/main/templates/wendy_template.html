@@ -107,7 +107,8 @@
         // creates new mark on map
         google.maps.event.addListener(map, 'click', function(event) {
           placeMarker(event.latLng);
-          show_postbox();
+          // passing in the latlng into the show_postbox function 
+          show_postbox(event.latLng);
         });
         console.log(marks);
         // updates map with all marks in database/json object 
@@ -121,6 +122,7 @@
         var marker = new google.maps.Marker({
           position: location,
           map: map,
+          draggable: true,
         });
         google.maps.event.addListener(marker, 'click', function() {
             show_lightbox(pk);
@@ -133,8 +135,7 @@
             return marks[i];
           }
         }
-        // return nothing
-        return null;
+        return false;
       }
       function show_lightbox(pk) {
         var mark = lookup_mark(pk);
@@ -142,19 +143,22 @@
         $("div#lb_body").html(mark['fields']['body']);
         $("div#lightbox").show();
         marknum++;
+        // don't refresh 
         return false;
       };
       function hide_lightbox() {
         $("div#lightbox").hide();
         return false;
       };
-      function show_postbox() {
+      function show_postbox(latLng) {
         $("div#postnote").show();
-        return false; // prevents page from refreshing 
+        alert(latLng);
+        return false; 
       };
       function hide_postbox() {
         $("div#postnote").hide();
         return false; 
+        // prevents page from refreshing 
       };
       $(document).ready(function(){
         $("a#xclose").click(hide_lightbox);
@@ -163,8 +167,6 @@
       });
     </script>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-    <script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/wendiewang" data-format="hover" data-text="Wendie Wang" data-related="false"></script>
   </head>
 
   <body onload="initialize()"> <!-- document object model window.onload -->  
@@ -183,10 +185,12 @@
     </div>
     <div id="postnote"> 
       <a id="closepost" href="">[x]</a>
-      <form action="/add/" method="post">
-        <p> <input type="text" name="title" id="title" />
-        <p> <textarea name="description" id="description" cols="25" rows="5"> </textarea>
-      <p><input type="submit" value="add a note" />
+      <form action="/marks" method="post">
+        {% csrf_token %}
+        <p> title: <input type="text" name="title" id="title" />
+        <p> description: <p>
+        <textarea name="body" id="body" cols="25" rows="5"> </textarea>
+        <p><input type="submit" value="add a note" />
       </form>
     </div>
     <div id="bottom">
