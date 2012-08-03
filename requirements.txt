@@ -1,0 +1,4 @@
+Django==1.4.1
+geopy==0.94.2
+pymongo==2.2.1
+wsgiref==0.1.2
