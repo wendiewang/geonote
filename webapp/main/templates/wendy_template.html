@@ -152,7 +152,8 @@
       };
       function show_postbox(latLng) {
         $("div#postnote").show();
-        alert(latLng);
+        $("#lon").val(latLng.lng());
+        $("#lat").val(latLng.lat());
         return false; 
       };
       function hide_postbox() {
@@ -185,13 +186,16 @@
     </div>
     <div id="postnote"> 
       <a id="closepost" href="">[x]</a>
-      <form action="/marks" method="post">
+      <form action="/marks/" method="post">
         {% csrf_token %}
         <p> title: <input type="text" name="title" id="title" />
         <p> description: <p>
         <textarea name="body" id="body" cols="25" rows="5"> </textarea>
+        <input type="hidden" name="lon" id="lon">
+        <input type="hidden" name="lat" id="lat">
         <p><input type="submit" value="add a note" />
       </form>
+
     </div>
     <div id="bottom">
       <div id="footer">

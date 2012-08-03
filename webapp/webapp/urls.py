@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # for the post, use nouns
-    url(r'^', 'main.views.add', name='add'),
+    url(r'^marks/', 'main.views.marks', name='marks'),
 )
