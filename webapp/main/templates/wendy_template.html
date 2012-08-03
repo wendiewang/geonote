@@ -15,11 +15,11 @@
       a {
         text-decoration: none;
       }
-      div#top {
+      div.wide {
         width: 100%;
         background-color: #ccc;
       }
-      div#header {
+      div.center {
         width: 960px;
         height: 40px;
         margin: 0 auto 0 auto; 
@@ -31,15 +31,21 @@
       }
       div#bigmap {
         margin-left: 200px;
-        top: 0px;
+        top: 5px;
         width: 100px;
         position: absolute;
         z-index: 15;
       }
       div#note {
         margin-left: 300px;
-        top: 0px;
+        top: 5px;
         width: 100px;
+        position: absolute;
+      }
+      div#search {
+        margin-left: 770px;
+        top: 5px;
+        width: 200px;
         position: absolute;
       }
       div#postnote {
@@ -79,11 +85,17 @@
       div#bottom {
         width: 100%;
         background-color: #ccc;
+        position: relative;
       }
-      div#footer {
-        width: 960px;
-        margin: 0 auto 0 auto; 
-        background-color: #ccc;
+      div#seo {
+        position: absolute;
+        padding: 5px;
+      }
+      div#credit {
+        margin-left: 770px;
+        width: 200px;
+        position: absolute;
+        padding: 5px;
       }
     </style>
     <script type="text/javascript"
@@ -165,17 +177,48 @@
         $("a#xclose").click(hide_lightbox);
         $("a#closepost").click(hide_postbox);
         $("a#apostnote").click(show_postbox);
+
+      // search bar functionality             
+      $(function() {
+        $("#address")({
+          // uses the geocoder to get address values
+          source: function(request, response) {
+            geocoder.geocode( {'address': request.term }, function(results, status) {
+              response($.map(results, function(item) {
+                return {
+                  label: item.formatted_address,
+                  value: item.formatted_address,
+                  latitude: item.geometry.location.lat(),
+                  longitude: item.geometry.location.lng()
+                }
+              }));
+            })
+          },
+          // execute with selected address
+          select: function(event, ui) {
+            $("#latitude").val(ui.item.latitude);
+            $("#longitude").val(ui.item.longitude);
+            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+            marker.setPosition(location);
+            map.setCenter(location);
+          }
+        });
+      });
+
       });
     </script>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </head>
 
   <body onload="initialize()"> <!-- document object model window.onload -->  
-    <div id="top">
-      <div id="header">
+    <div class="wide">
+      <div class="center">
         <div id="logo"> <img src="http://www.logomaker.com/logo-images/cc21834903f8f9ce.gif" height="40"></div>
         <div id="bigmap">big map</div>
         <div id="note"><a id="apostnote" href="">note</a></div>
+        <div id="search"> 
+          <input id="address" type="text"/>
+        </div>
       </div>
     </div>
     <div id="map_canvas"></div>
@@ -189,22 +232,19 @@
       <form action="/marks/" method="post">
         {% csrf_token %}
         <p> title: <input type="text" name="title" id="title" />
-        <p> description: <p>
+        <p> description: <p> 
         <textarea name="body" id="body" cols="25" rows="5"> </textarea>
         <input type="hidden" name="lon" id="lon">
         <input type="hidden" name="lat" id="lat">
         <p><input type="submit" value="add a note" />
       </form>
-
     </div>
-    <div id="bottom">
-      <div id="footer">
+    <div class="wide">
+      <div class="center">
         <div id="seo">
-          <a href="https://twitter.com/wendiewang" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @wendiewang</a>  
-        </div>
+          <a href="https://twitter.com/wendiewang" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @wendiewang</a></div>
         <div id="credit">
-          made by <a href="http://www.linkedin.com/in/wendiewang"> wendiewang </a> 
-        </div>
+          made by <a href="http://www.linkedin.com/in/wendiewang"> wendiewang</a></div>
       </div>
     </div>
   </body>
