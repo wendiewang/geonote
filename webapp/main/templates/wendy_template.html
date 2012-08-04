@@ -1,223 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style type="text/css">
-      html { 
-        height: 100% 
-      }
-      body { 
-        height: 100%; 
-        margin: 0 auto 0 auto; 
-        width: 100%;
-        padding: 0;
-        z-index: 1;
-      }
-      a {
-        text-decoration: none;
-      }
-      div.wide {
-        width: 100%;
-        background-color: #ccc;
-      }
-      div.center {
-        width: 960px;
-        height: 40px;
-        margin: 0 auto 0 auto; 
-        background-color: #ccc;
-        position: relative;
-      }
-      div#logo {
-        width: 150px;
-      }
-      div#bigmap {
-        margin-left: 200px;
-        top: 5px;
-        width: 100px;
-        position: absolute;
-        z-index: 15;
-      }
-      div#note {
-        margin-left: 300px;
-        top: 5px;
-        width: 100px;
-        position: absolute;
-      }
-      div#search {
-        margin-left: 770px;
-        top: 5px;
-        width: 200px;
-        position: absolute;
-      }
-      div#postnote {
-        top: 20px;
-        position: absolute;
-        width: 400px;
-        min-height: 200px;
-        background-color: #FFF8DC;
-        left: 30%;  
-        z-index: 500;
-        display: none;
-      }
-      div#map_canvas { 
-        height: 92%;
-        width: 100%;
-      }
-      div#lightbox {
-        top: 20px;
-        position: fixed;
-        width: 600px;
-        min-height: 300px;
-        background-color: #FFF8DC;
-        left: 30%;  
-        z-index: 500;
-        display: none;
-      }
-      /*div#screen {
-        position: fixed;
-        z-index: 999;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: none;
-      }*/
-      div#bottom {
-        width: 100%;
-        background-color: #ccc;
-        position: relative;
-      }
-      div#seo {
-        position: absolute;
-        padding: 5px;
-      }
-      div#credit {
-        margin-left: 770px;
-        width: 200px;
-        position: absolute;
-        padding: 5px;
-      }
-    </style>
+    <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.8.22.custom.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDFYRAM772sUm9kQtUa73mfBuxYXs8T9n0&sensor=false"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.8.22.custom.min.js"></script>
     <script type="text/javascript">
-      var map;
-      var marknum = 0;
-      // json communicates data between python and javascript 
-      // list of dictionaries, each dictionary is a mark 
-      var marks = jQuery.parseJSON('{{ posts|safe }}');
-      function initialize() {
-        var myLatlng = new google.maps.LatLng(37.751, -122.433);
-        var mapOptions = {
-          zoom: 13,
-          center: myLatlng,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        // creates the map 
-        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-        // creates new mark on map
-        google.maps.event.addListener(map, 'click', function(event) {
-          placeMarker(event.latLng);
-          // passing in the latlng into the show_postbox function 
-          show_postbox(event.latLng);
-        });
-        console.log(marks);
-        // updates map with all marks in database/json object 
-        for (i=0; i<marks.length; i++) {
-          mark_latlng = new google.maps.LatLng(marks[i]['fields']['lat'], marks[i]['fields']['lon']);
-          console.log(mark_latlng);
-          placeMarker(mark_latlng, marks[i]['pk']);
-        }
-      }
-      function placeMarker(location,pk) {
-        var marker = new google.maps.Marker({
-          position: location,
-          map: map,
-          draggable: true,
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-            show_lightbox(pk);
-        });
-      }
-      // matches pk of mark against the json object 
-      function lookup_mark(pk) {
-        for(var i=0;i<marks.length;i++) {
-          if (marks[i]['pk'] == pk) {
-            return marks[i];
-          }
-        }
-        return false;
-      }
-      function show_lightbox(pk) {
-        var mark = lookup_mark(pk);
-        $("div#lb_title").html(mark['fields']['title']);
-        $("div#lb_body").html(mark['fields']['body']);
-        $("div#lightbox").show();
-        marknum++;
-        // don't refresh 
-        return false;
-      };
-      function hide_lightbox() {
-        $("div#lightbox").hide();
-        return false;
-      };
-      function show_postbox(latLng) {
-        $("div#postnote").show();
-        $("#lon").val(latLng.lng());
-        $("#lat").val(latLng.lat());
-        return false; 
-      };
-      function hide_postbox() {
-        $("div#postnote").hide();
-        return false; 
-        // prevents page from refreshing 
-      };
-      $(document).ready(function(){
-        $("a#xclose").click(hide_lightbox);
-        $("a#closepost").click(hide_postbox);
-        $("a#apostnote").click(show_postbox);
-      });
-      // search bar functionality             
-      function search() {
-        $("#address").autocomplete ({
-          // uses the geocoder to get address values
-          source: function(request, response) {
-            geocoder.geocode( {'address': request.term }, function(results, status) {
-              response($.map(results, function(item) {
-                return {
-                  label: item.formatted_address,
-                  value: item.formatted_address,
-                  latitude: item.geometry.location.lat(),
-                  longitude: item.geometry.location.lng()
-                }
-              }));
-            })
-          },
-          // execute with selected address
-          select: function(event, ui) {
-            $("#latitude").val(ui.item.latitude);
-            $("#longitude").val(ui.item.longitude);
-            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-            marker.setPosition(location);
-            map.setCenter(location);
-          }
-        });
-      };
-
+    // inline script
+    var marks = jQuery.parseJSON('{{ posts|safe }}');
     </script>
+    <script type="text/javascript" src="/static/js/application.js"></script>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </head>
 
-  <body onload="initialize()"> <!-- document object model window.onload -->  
+  <body>
     <div class="wide">
       <div class="center">
-        <div id="logo"> <img src="http://www.logomaker.com/logo-images/cc21834903f8f9ce.gif" height="40"></div>
+        <div id="logo"> <img src="/static/img/logo.gif" height="40"></div>
         <div id="bigmap">big map</div>
         <div id="note"><a id="apostnote" href="">note</a></div>
         <div id="search"> 
           <input type="text" id="address" value=""/>
-<button onclick="search();">Search</button>
+          <button onclick="search();">Search</button>
         </div>
       </div>
     </div>
