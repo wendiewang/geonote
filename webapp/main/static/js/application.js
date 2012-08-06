@@ -93,12 +93,23 @@ function hide_postbox() {
   // prevents page from refreshing 
 };
 
+function show_ticker() {
+  $("div#ticker").show();
+  return false; 
+};
+
+function hide_ticker() {
+  $("div#ticker").hide();
+  return false; 
+};
 
 // Main
 $(document).ready(function(){
   $("a#xclose").click(hide_lightbox);
   $("a#closepost").click(hide_postbox);
   $("a#apostnote").click(show_postbox);
+  $("a#ticker").click(show_ticker);
+  $("a#xticker").click(hide_ticker);
   initialize();
   search();
 });
