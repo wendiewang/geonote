@@ -31,7 +31,7 @@ function initialize() {
   center_marker = new google.maps.Marker({
     position: myLatlng,
     map: map,
-    icon: "/static/img/flag.png",
+    //icon: "/static/img/flag.png",
     draggable: false
   });
 
@@ -94,6 +94,16 @@ function hide_postbox() {
 };
 
 function show_ticker() {
+  tick_html = "";
+  for(var i=0;i<marks.length;i++) {
+    tick_html += "<div>";
+    tick_html += "Title: ";
+    tick_html += marks[i]['fields']['title'];
+    tick_html += " Body: ";
+    tick_html += marks[i]['fields']['body'];
+    tick_html += "</div>";
+  }
+  $("div#ticker").html(tick_html);
   $("div#ticker").show();
   return false; 
 };

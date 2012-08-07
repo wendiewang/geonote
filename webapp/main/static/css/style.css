@@ -7,6 +7,7 @@ body {
   width: 100%;
   padding: 0;
   z-index: 1;
+  font-family: sans-serif;
 }
 a {
   text-decoration: none;
@@ -17,7 +18,7 @@ div.wide {
 }
 div.center {
   width: 960px;
-  height: 40px;
+  height: 50px;
   margin: 0 auto 0 auto; 
   background-color: #ccc;
   position: relative;
@@ -27,21 +28,21 @@ div#logo {
 }
 div#bigmap {
   margin-left: 200px;
-  top: 5px;
+  top: 15px;
   width: 100px;
   position: absolute;
   z-index: 15;
 }
 div#note {
   margin-left: 300px;
-  top: 5px;
+  top: 15px;
   width: 100px;
   position: absolute;
 }
 div#search {
-  margin-left: 770px;
-  top: 5px;
-  width: 200px;
+  margin-left: 700px;
+  top: 13px;
+  width: 250px;
   position: absolute;
 }
 div#postnote {
@@ -78,6 +79,16 @@ div#lightbox {
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
 }*/
+div#ticker {
+  top: 70px;
+  position: fixed;
+  width: 450px;
+  min-height: 700px;
+  background-color: #FFF8DC;
+  left: 50%;  
+  z-index: 500;
+  display: none;
+}
 div#bottom {
   width: 100%;
   background-color: #ccc;
