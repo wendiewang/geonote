@@ -38,12 +38,13 @@ function initialize() {
   geocoder = new google.maps.Geocoder();
 }
 
-
+// new markers
 function placeMarker(location,pk) {
   var marker = new google.maps.Marker({
     position: location,
     map: map,
     draggable: true,
+    icon: "/static/img/meeh.jpg"
   });
   google.maps.event.addListener(marker, 'click', function() {
       show_lightbox(pk);

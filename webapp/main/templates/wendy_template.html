@@ -7,12 +7,14 @@
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDFYRAM772sUm9kQtUa73mfBuxYXs8T9n0&sensor=false"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script type="text/javascript" src="webticker_lib.js" language="javascript"></script>
     <script type="text/javascript">
     // inline script
     var marks = jQuery.parseJSON('{{ posts|safe }}');
     </script>
     <script type="text/javascript" src="/static/js/application.js"></script>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <title>[geonote] leave your mark around the world</title>
   </head>
 
   <body>
@@ -44,8 +46,8 @@
         <p><input type="submit" value="add a note" />
       </form>
     </div>
-    <div id="ticker">
-      tada 
+    <div id="ticker" class="shadow">
+      <a id="xticker" href="#">[x]</a>
     </div>
     <div class="wide">
       <div class="center">

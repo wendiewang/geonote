@@ -14,3 +14,8 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class User(models.Model):
+	username = models.CharField(max_length=30)
+	email = models.CharField(max_length=256)
+	password = models.CharField(max_length=30)

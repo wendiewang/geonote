@@ -7,35 +7,61 @@ body {
   width: 100%;
   padding: 0;
   z-index: 1;
-  font-family: sans-serif;
+  font-family: Verdana, sans-serif;
 }
-a {
+
+a:link {
   text-decoration: none;
+  color: #E87E00;
+  font-weight: bold;
 }
-div.wide {
+
+a:visited {color:#E87E00;}  
+a:hover {color:#FFFFFF;}  
+a:active {color:#FFFFFF;}
+
+
+.wide {
   width: 100%;
-  background-color: #ccc;
+  /* background-color: #ccc; */ 
+  background: rgb(208,208,208); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(208,208,208,1) 0%, rgba(212,212,212,1) 12%, rgba(215,215,215,1) 25%, rgba(207,207,207,1) 39%, rgba(200,200,200,1) 50%, rgba(189,189,189,1) 51%, rgba(193,193,193,1) 60%, rgba(200,200,200,1) 76%, rgba(196,196,196,1) 91%, rgba(194,194,194,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(208,208,208,1)), color-stop(12%,rgba(212,212,212,1)), color-stop(25%,rgba(215,215,215,1)), color-stop(39%,rgba(207,207,207,1)), color-stop(50%,rgba(200,200,200,1)), color-stop(51%,rgba(189,189,189,1)), color-stop(60%,rgba(193,193,193,1)), color-stop(76%,rgba(200,200,200,1)), color-stop(91%,rgba(196,196,196,1)), color-stop(100%,rgba(194,194,194,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d0d0', endColorstr='#c2c2c2',GradientType=0 ); /* IE6-9 */
 }
-div.center {
+.center {
   width: 960px;
   height: 50px;
   margin: 0 auto 0 auto; 
-  background-color: #ccc;
+  /* background-color: #ccc; */
   position: relative;
+  background: rgb(208,208,208); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(208,208,208,1) 0%, rgba(212,212,212,1) 12%, rgba(215,215,215,1) 25%, rgba(207,207,207,1) 39%, rgba(200,200,200,1) 50%, rgba(189,189,189,1) 51%, rgba(193,193,193,1) 60%, rgba(200,200,200,1) 76%, rgba(196,196,196,1) 91%, rgba(194,194,194,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(208,208,208,1)), color-stop(12%,rgba(212,212,212,1)), color-stop(25%,rgba(215,215,215,1)), color-stop(39%,rgba(207,207,207,1)), color-stop(50%,rgba(200,200,200,1)), color-stop(51%,rgba(189,189,189,1)), color-stop(60%,rgba(193,193,193,1)), color-stop(76%,rgba(200,200,200,1)), color-stop(91%,rgba(196,196,196,1)), color-stop(100%,rgba(194,194,194,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d0d0', endColorstr='#c2c2c2',GradientType=0 ); /* IE6-9 */
+}
 }
 div#logo {
   width: 150px;
 }
 div#bigmap {
   margin-left: 200px;
-  top: 15px;
+  top: 17px;
   width: 100px;
   position: absolute;
   z-index: 15;
 }
 div#note {
   margin-left: 300px;
-  top: 15px;
+  top: 17px;
   width: 100px;
   position: absolute;
 }
@@ -50,13 +76,13 @@ div#postnote {
   position: absolute;
   width: 400px;
   min-height: 200px;
-  background-color: #FFF8DC;
+  background-color: #FFFFF2;
   left: 30%;  
   z-index: 500;
   display: none;
 }
 div#map_canvas { 
-  height: 92%;
+  height: 90%;
   width: 100%;
 }
 div#lightbox {
@@ -64,10 +90,12 @@ div#lightbox {
   position: fixed;
   width: 600px;
   min-height: 300px;
-  background-color: #FFF8DC;
+  background-color: #FFFFF2;
   left: 30%;  
   z-index: 500;
   display: none;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 /*div#screen {
   position: fixed;
@@ -84,15 +112,14 @@ div#ticker {
   position: fixed;
   width: 450px;
   min-height: 700px;
-  background-color: #FFF8DC;
+  background-color: #FFFFF2;
   left: 50%;  
   z-index: 500;
   display: none;
-}
-div#bottom {
-  width: 100%;
-  background-color: #ccc;
-  position: relative;
+  padding: 4px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  border:1px solid #ccc;
 }
 div#seo {
   position: absolute;
