@@ -58,12 +58,14 @@ div#bigmap {
   width: 100px;
   position: absolute;
   z-index: 15;
+  display: none;
 }
 div#note {
   margin-left: 300px;
   top: 17px;
   width: 100px;
   position: absolute;
+  display: none;
 }
 div#search {
   margin-left: 700px;
@@ -122,12 +124,13 @@ div#ticker {
   border:1px solid #ccc;
 }
 div#seo {
-  position: absolute;
+  /*position: absolute;*/
   padding: 5px;
 }
 div#credit {
-  margin-left: 770px;
-  width: 200px;
-  position: absolute;
+  margin-top: 0px;
+  margin-left: 820px;
+  width: 100px;
+  /*position: absolute;*/
   padding: 5px;
 }

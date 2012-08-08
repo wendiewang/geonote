@@ -7,7 +7,6 @@
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDFYRAM772sUm9kQtUa73mfBuxYXs8T9n0&sensor=false"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery-ui-1.8.22.custom.min.js"></script>
-    <script type="text/javascript" src="webticker_lib.js" language="javascript"></script>
     <script type="text/javascript">
     // inline script
     var marks = jQuery.parseJSON('{{ posts|safe }}');
@@ -21,8 +20,8 @@
     <div class="wide">
       <div class="center">
         <div id="logo"> <img src="/static/img/logo-small.png"></div>
-        <div id="bigmap"><a id="ticker" href="#">ticker</a></div>
-        <div id="note"><a id="apostnote" href="#">note</a></div>
+        <div id="bigmap"><a id="ticker" href="#"> | ticker</a></div>
+        <div id="note"><a id="apostnote" href="#"> | note | </a></div>
         <div id="search"> 
           <input type="text" id="address" value=""/><button onclick="search();">Search</button>
         </div>
@@ -52,9 +51,10 @@
     <div class="wide">
       <div class="center">
         <div id="seo">
-          <a href="https://twitter.com/wendiewang" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @wendiewang</a></div>
+          </div>
+
         <div id="credit">
-          made by <a href="http://www.linkedin.com/in/wendiewang"> wendiewang</a></div>
+          <a href="https://twitter.com/wendiewang" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true">Follow @wendiewang</a></div>
       </div>
     </div>
   </body>
