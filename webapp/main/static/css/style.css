@@ -82,6 +82,8 @@ div#postnote {
   left: 30%;  
   z-index: 500;
   display: none;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 div#map_canvas { 
   height: 90%;

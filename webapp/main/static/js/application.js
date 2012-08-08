@@ -16,7 +16,6 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   // creates new mark on map
   google.maps.event.addListener(map, 'click', function(event) {
-    placeMarker(event.latLng);
     // passing in the latlng into the show_postbox function 
     show_postbox(event.latLng);
   });
@@ -114,7 +113,7 @@ function hide_ticker() {
   return false; 
 };
 
-// Main
+// main
 $(document).ready(function(){
   $("a#xclose").click(hide_lightbox);
   $("a#closepost").click(hide_postbox);
