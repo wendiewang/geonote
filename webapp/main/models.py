@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 # only functions that are used for manipulating data from the database 
 
-
 class Post(models.Model):
     title = models.CharField(max_length=60)
     body = models.TextField()
@@ -16,8 +15,3 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
-
-#class User(models.Model):
-#	username = models.CharField(max_length=30)
-#	email = models.CharField(max_length=256)
-#	password = models.CharField(max_length=30)
