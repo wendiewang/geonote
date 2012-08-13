@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.contrib.auth.models import User
 
 # Create your models here.
 # only functions that are used for manipulating data from the database 
@@ -11,11 +12,12 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     lon = models.FloatField(max_length=10)
     lat = models.FloatField(max_length=10)
+    user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
 
-class User(models.Model):
-	username = models.CharField(max_length=30)
-	email = models.CharField(max_length=256)
-	password = models.CharField(max_length=30)
+#class User(models.Model):
+#	username = models.CharField(max_length=30)
+#	email = models.CharField(max_length=256)
+#	password = models.CharField(max_length=30)
