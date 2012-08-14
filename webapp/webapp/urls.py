@@ -20,6 +20,6 @@ urlpatterns = patterns('',
     # for the post, use nouns
     url(r'^marks/', 'main.views.marks', name='marks'),
 
-    url(r'^login/$', 'main.views.user_login', name='login'),
-    url(r'^logout/$', 'main.views.user_logout', name='logout')
+    #url(r'^login/$', 'main.views.user_login', name='login'),
+    #url(r'^logout/$', 'main.views.user_logout', name='logout')
 )
