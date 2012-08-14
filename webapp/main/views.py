@@ -10,9 +10,10 @@ from models import Post
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 # decorator 
-@login_required
+#@login_required
 def home(request):
 	#posts = Post.objects.all()
 	posts = Post.objects.filter(user=request.user)
@@ -22,7 +23,7 @@ def home(request):
                          context_instance=RequestContext(request))
  	#return render_to_response('wendy_template.html', { 'content': content })
 
-@login_required
+#@login_required
 def marks(request):
 	form = Post()
 	if request.method == 'POST': # If the form has been submitted...
@@ -37,3 +38,22 @@ def marks(request):
 	#	'form': form,
 	#})
 	return redirect("/")
+
+def user_login(request):
+    username = request.POST.get("user")
+    print username
+    password = request.POST.get("password")
+    print password
+    user = authenticate(username=username, password=password)
+
+    if user:
+        print("Successfully logged in")
+        login(request, user)
+        return redirect("home")
+    else:
+        print "No such user"
+        return render(request, "bad_login.html")
+
+def user_logout(request):
+    logout(request)
+    return redirect("home")
