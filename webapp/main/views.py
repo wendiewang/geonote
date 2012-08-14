@@ -11,6 +11,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 # decorator 
 @login_required
@@ -37,7 +39,24 @@ def marks(request):
 	#return render(request, 'wendy_template.html', {
 	#	'form': form,
 	#})
-	return redirect("/")
+	return redirect('webapp.main.views.home')
+
+def register(request):
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			# new_user = User()
+			# new_user.username = form.cleaned_data['username']
+			# new_user.setPassword(form.cleaned_data['password'])
+			# new_user.save()
+			new_user = form.save()
+			user = authenticate(username=new_user.username, password=form.cleaned_data['password1'])
+			login(request, user)
+			return redirect("/")
+	else:
+		form = UserCreationForm()
+	return render_to_response("registration/register.html", dict(form=form), 
+		context_instance=RequestContext(request))
 
 # def user_login(request):
 #     username = request.POST.get("user")

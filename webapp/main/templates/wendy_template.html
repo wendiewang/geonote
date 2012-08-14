@@ -23,8 +23,14 @@
         <div id="logo"> <img src="/static/img/logo-small.png"></div>
         <div id="bigmap"><a id="ticker" href="#">ticker</a></div>
         <div id="note"><a id="apostnote" href="#">note</a></div>
-        <div id="login">
-          <a href="/accounts/logout/?next=/">logout</a>
+        <div id="login">{% if user.is_authenticated %} 
+          {{ user.username }}
+          {% else %}
+          not logged in
+          {% endif %} 
+        </div>
+        <div id="logout"> 
+          <a href="/accounts/logout/?next=/">logout</a> 
         </div>
         <div id="search"> 
           <input type="text" id="address" value=""/><button onclick="search();">Search</button>

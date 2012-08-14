@@ -66,11 +66,18 @@ div#note {
   position: absolute;
 }
 div#login {
+  margin-left: 510px;
+  top: 17px;
+  width: 100px;
+  position: absolute;
+}
+div#logout {
   margin-left: 630px;
   top: 17px;
   width: 100px;
   position: absolute;
 }
+
 div#search {
   margin-left: 700px;
   top: 13px;
