@@ -8,7 +8,8 @@
 	body { 
 		height: 100%; 
 		margin: 0; 
-		padding: 0 
+		padding: 0;
+		font-family: sans-serif;
 	}
 	#map_canvas { 
 		height: 100% 
@@ -56,7 +57,7 @@ function random(from, to, fixed) {
 <div id="login">
 <img src="/static/img/logo-large.png">
 
-  <h1>Create an account</h1>
+  <h4>Create an account</h4>
 
 	<form action="" method="post">
 		{% csrf_token %}

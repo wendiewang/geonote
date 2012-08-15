@@ -9,7 +9,8 @@
 	body { 
 		height: 100%; 
 		margin: 0; 
-		padding: 0 
+		padding: 0;
+		font-family: sans-serif;
 	}
 	#map_canvas { 
 		height: 100% 
@@ -43,7 +44,6 @@ function initialize()  {
 	}
 function random(from, to, fixed) {
     return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
-    // .toFixed() returns string, so ' * 1' is a trick to convert to number
 }
 	// $(document).ready(function(){
 	// 	initialize();
