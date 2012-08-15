@@ -6,7 +6,13 @@ var center_marker;
 // list of dictionaries, each dictionary is a mark 
 
 function initialize() {
-  var myLatlng = new google.maps.LatLng(37.751, -122.433);
+  var myLatlng = null;
+  if(marks.length>0) {
+    var lastmark = marks[marks.length-1];
+    myLatlng = new google.maps.LatLng(lastmark['fields']['lat'], lastmark['fields']['lon']);
+  } else {
+    myLatlng = new google.maps.LatLng(37.751, -122.433);
+  }
   var mapOptions = {
     zoom: 13,
     center: myLatlng,

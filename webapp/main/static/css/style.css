@@ -58,12 +58,14 @@ div#bigmap {
   width: 100px;
   position: absolute;
   z-index: 15;
+  display: none;
 }
 div#note {
   margin-left: 300px;
   top: 17px;
   width: 100px;
   position: absolute;
+  display: none;
 }
 div#login {
   margin-left: 510px;

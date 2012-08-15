@@ -39,7 +39,7 @@ def marks(request):
 	#return render(request, 'wendy_template.html', {
 	#	'form': form,
 	#})
-	return redirect('webapp.main.views.home')
+	return redirect('/')
 
 def register(request):
 	if request.method == 'POST':
