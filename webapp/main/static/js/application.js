@@ -2,8 +2,6 @@ var map;
 var marknum = 0;
 var geocoder;
 var center_marker;
-// json communicates data between python and javascript 
-// list of dictionaries, each dictionary is a mark 
 
 function initialize() {
   var myLatlng = null;
@@ -22,7 +20,7 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   // creates new mark on map
   google.maps.event.addListener(map, 'click', function(event) {
-    // passing in the latlng into the show_postbox function 
+  // passing in the latlng into the show_postbox function 
     show_postbox(event.latLng);
   });
   console.log(marks);
@@ -36,7 +34,6 @@ function initialize() {
   center_marker = new google.maps.Marker({
     position: myLatlng,
     map: map,
-    //icon: "/static/img/flag.png",
     draggable: false
   });
 
@@ -49,6 +46,7 @@ function placeMarker(location,pk) {
     position: location,
     map: map,
     draggable: true,
+    // user icon, need to make it per user 
     icon: "/static/img/meeh.jpg"
   });
   google.maps.event.addListener(marker, 'click', function() {
@@ -57,7 +55,7 @@ function placeMarker(location,pk) {
 }
 
 
-// matches pk of mark against the json object 
+// matches pk of mark against the json 
 function lookup_mark(pk) {
   for(var i=0;i<marks.length;i++) {
     if (marks[i]['pk'] == pk) {
@@ -65,16 +63,23 @@ function lookup_mark(pk) {
     }
   }
   return false;
+  // don't refresh 
 }
 
-
+// puts json into the lightbox
 function show_lightbox(pk) {
   var mark = lookup_mark(pk);
+  var img_html = "";
+  img_html += "<img src=\"";
+  img_html += mark['fields']['img'];
+  img_html += "\">";
+  alert(img_html)
   $("div#lb_title").html(mark['fields']['title']);
   $("div#lb_body").html(mark['fields']['body']);
+  $("div#lb_image").html(img_html);
+  //$("div#lb_image").html(mark['fields']['img'])
   $("div#lightbox").show();
   marknum++;
-  // don't refresh 
   return false;
 };
 
@@ -100,12 +105,10 @@ function hide_postbox() {
 };
 
 function show_ticker() {
-  tick_html = "";
+  var tick_html = "";
   for(var i=0;i<marks.length;i++) {
     tick_html += "<div>";
-    tick_html += "Title: ";
     tick_html += marks[i]['fields']['title'];
-    tick_html += " Body: ";
     tick_html += marks[i]['fields']['body'];
     tick_html += "</div>";
   }
@@ -119,19 +122,7 @@ function hide_ticker() {
   return false; 
 };
 
-// main
-$(document).ready(function(){
-  $("a#xclose").click(hide_lightbox);
-  $("a#closepost").click(hide_postbox);
-  $("a#apostnote").click(show_postbox);
-  $("a#ticker").click(show_ticker);
-  $("a#xticker").click(hide_ticker);
-  initialize();
-  search();
-});
-
-
-// search bar functionality             
+// search bar           
 function search() {
   $("#address").autocomplete ({
     // uses the geocoder to get address values
@@ -157,3 +148,14 @@ function search() {
     }
   });
 };
+
+// same as html-body-onload 
+$(document).ready(function(){
+  $("a#xclose").click(hide_lightbox);
+  $("a#closepost").click(hide_postbox);
+  $("a#apostnote").click(show_postbox);
+  $("a#ticker").click(show_ticker);
+  $("a#xticker").click(hide_ticker);
+  initialize();
+  search();
+});

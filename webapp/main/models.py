@@ -11,12 +11,11 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     lon = models.FloatField(max_length=10)
     lat = models.FloatField(max_length=10)
-    img = forms.FileField()
+    img = models.FileField(upload_to='markimages')
     user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
-
 
 # class UserProfile(models.Model):
 # 	user = models.OneToOneField(User)
