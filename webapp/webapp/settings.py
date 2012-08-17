@@ -1,5 +1,11 @@
 # Django settings for webapp project.
 
+import os
+import django
+
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+SITE_ROOT = os.path.dirname(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../.."))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -55,7 +61,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(SITE_ROOT, "static/img/uploads/")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -77,7 +83,10 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(SITE_ROOT, "static"),
     "/Users/student/src/trewd/webapp/static",
+    "/Users/student/src/geonote/main/static",
+    "/Users/student/src/markimages",
 )
 
 # List of finder classes that know how to find static files in
@@ -115,8 +124,9 @@ WSGI_APPLICATION = 'webapp.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
+    # Always use forward slashes, even orn Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(SITE_ROOT, "templates"),
     "/Users/student/src/trewd/webapp/views",
     "/home/wendy/geonote/webapp/main/templates"
     #/Users/student/src/trewd/env/lib/python2.7/site-packages/django

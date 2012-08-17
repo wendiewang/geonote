@@ -149,3 +149,8 @@ div#credit {
   /*position: absolute;*/
   padding: 5px;
 }
+
+div#lb_image img {
+  max-width: 300px;
+  max-height: 300px;
+}

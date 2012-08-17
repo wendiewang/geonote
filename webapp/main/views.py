@@ -19,6 +19,8 @@ from django.contrib.auth.forms import UserCreationForm
 def home(request):
 	#posts = Post.objects.all()
 	posts = Post.objects.filter(user=request.user)
+	for p in posts:
+		print p.img.url
 	postsjson = serializers.serialize('json', posts)
 	return render_to_response('wendy_template.html',
                          dict(posts=postsjson),

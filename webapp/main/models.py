@@ -11,7 +11,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     lon = models.FloatField(max_length=10)
     lat = models.FloatField(max_length=10)
-    img = models.FileField(upload_to='markimages')
+    img = models.FileField(blank=True, null=True, upload_to='.')
     user = models.ForeignKey(User)
 
     def __unicode__(self):

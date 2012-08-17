@@ -69,14 +69,11 @@ function lookup_mark(pk) {
 // puts json into the lightbox
 function show_lightbox(pk) {
   var mark = lookup_mark(pk);
-  var img_html = "";
-  img_html += "<img src=\"";
-  img_html += mark['fields']['img'];
-  img_html += "\">";
-  alert(img_html)
+  var img_root = "/static/img/uploads/"
+  
   $("div#lb_title").html(mark['fields']['title']);
   $("div#lb_body").html(mark['fields']['body']);
-  $("div#lb_image").html(img_html);
+  $("div#lb_image img").attr("src", img_root + mark['fields']['img']);
   //$("div#lb_image").html(mark['fields']['img'])
   $("div#lightbox").show();
   marknum++;
