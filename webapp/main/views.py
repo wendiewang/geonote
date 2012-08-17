@@ -41,6 +41,21 @@ def marks(request):
 	#})
 	return redirect('/')
 
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
+    return render_to_response('upload.html', {'form': form})
+
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+            
 def register(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
@@ -57,6 +72,9 @@ def register(request):
 		form = UserCreationForm()
 	return render_to_response("registration/register.html", dict(form=form), 
 		context_instance=RequestContext(request))
+
+
+
 
 # def user_login(request):
 #     username = request.POST.get("user")
