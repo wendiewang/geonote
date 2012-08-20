@@ -35,11 +35,11 @@ def marks(request):
 		form.body = request.POST['body']
 		form.lon = float(request.POST['lon'])
 		form.lat = float(request.POST['lat'])
-		form.img = request.FILES['file']
+		form.img = request.FILES.get('file', False)
 		form.user = request.user
 		form.save()
 	return redirect('/')
-            
+
 def register(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
@@ -49,7 +49,8 @@ def register(request):
 			# new_user.setPassword(form.cleaned_data['password'])
 			# new_user.save()
 			new_user = form.save()
-			user = authenticate(username=new_user.username, password=form.cleaned_data['password1'])
+			user = authenticate(username=new_user.username, 
+								password=form.cleaned_data['password1'])
 			login(request, user)
 			return redirect("/")
 	else:

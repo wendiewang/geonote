@@ -73,7 +73,13 @@ function show_lightbox(pk) {
   
   $("div#lb_title").html(mark['fields']['title']);
   $("div#lb_body").html(mark['fields']['body']);
-  $("div#lb_image img").attr("src", img_root + mark['fields']['img']);
+  if (mark['fields']['img']) {
+    $("div#lb_image img").attr("src", img_root + mark['fields']['img']);
+  }
+  else {
+    
+  }
+  //$("div#lb_image img").attr("src", img_root + mark['fields']['img']);
   //$("div#lb_image").html(mark['fields']['img'])
   $("div#lightbox").show();
   marknum++;
