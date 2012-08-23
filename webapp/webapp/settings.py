@@ -27,6 +27,8 @@ DATABASES = {
     }
 }
 
+
+
 # SESSION_ENGINE = 'mango.session'
 # AUTHENTICATION_BACKENDS = ('mango.auth.Backend',)
 # MONGODB_HOST = 'ds035907.mongolab.com'  # enter your MongoDB hostname here
@@ -184,3 +186,5 @@ TEMPLATE_CONTEXT_PROCESSORS =(
     "django.core.context_processors.request"
 
 )
+
+AUTH_PROFILE_MODULE = 'main.UserProfile'

@@ -1,0 +1,14 @@
+hello world
+<img src="/static/img/uploads/{{ profile_img }}">
+  <form action="{% url profile %}" method="post" enctype="multipart/form-data">
+  	{% csrf_token %}
+  	<table> 
+  	<tr>
+    	<td><label for="avatar">Avatar:</label></td>
+    	<td><input type="file" name="avatar" value="" id="avatar"></td>
+	</tr>
+	<tr>
+    	<td><input type="submit" value="Submit" /></td>
+	</tr>
+	</table> 
+  </form>

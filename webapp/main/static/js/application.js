@@ -28,7 +28,7 @@ function initialize() {
   for (i=0; i<marks.length; i++) {
     mark_latlng = new google.maps.LatLng(marks[i]['fields']['lat'], marks[i]['fields']['lon']);
     console.log(mark_latlng);
-    placeMarker(mark_latlng, marks[i]['pk']);
+    placeMarker(mark_latlng, marks[i]['pk'], lookup_user_image(marks[i]['fields']['user']));
   }
 
   center_marker = new google.maps.Marker({
@@ -41,13 +41,18 @@ function initialize() {
 }
 
 // new markers
-function placeMarker(location,pk) {
+function placeMarker(location,pk,icon) {
+  if(icon == "") {
+    icon = "/static/img/meeh.jpg"
+  } else {
+    icon = "/static/img/uploads/"+icon
+  }
   var marker = new google.maps.Marker({
     position: location,
     map: map,
     draggable: true,
     // user icon, need to make it per user 
-    icon: "/static/img/meeh.jpg"
+    icon: icon
   });
   google.maps.event.addListener(marker, 'click', function() {
       show_lightbox(pk);
@@ -66,6 +71,15 @@ function lookup_mark(pk) {
   // don't refresh 
 }
 
+function lookup_user_image(pk) {
+  for(var i=0;i<users.length;i++) {
+    if (users[i]['fields']['user'] == pk) {
+      return users[i]['fields']['img'];
+    }
+  }
+  return false;
+}
+
 // puts json into the lightbox
 function show_lightbox(pk) {
   var mark = lookup_mark(pk);
@@ -73,7 +87,7 @@ function show_lightbox(pk) {
   
   $("div#lb_title").html(mark['fields']['title']);
   $("div#lb_body").html(mark['fields']['body']);
-  if (mark['fields']['img']) {
+  if (mark['fields']['img'] != null) {
     $("div#lb_image img").attr("src", img_root + mark['fields']['img']);
   }
   else {

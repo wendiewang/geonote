@@ -14,6 +14,8 @@
     // escapejs symbols are safe 
     // list of dictionaries, each dictionary is a mark 
     var marks = jQuery.parseJSON("{{ posts|escapejs }}");
+    var users = jQuery.parseJSON("{{ users|escapejs }}");
+    console.log(users);
     </script>
     <script type="text/javascript" src="/static/js/application.js"></script>
 
@@ -28,7 +30,7 @@
         <div id="bigmap"><a id="ticker" href="#">ticker</a></div>
         <div id="note"><a id="apostnote" href="#">note</a></div>
         <div id="login">{% if user.is_authenticated %} 
-          {{ user.username }}
+          <a href="{% url profile %}">{{ user.username }}</a>
           {% else %}
           not logged in
           {% endif %} 

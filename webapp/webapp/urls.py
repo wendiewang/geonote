@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='logout'),
     url(r'^accounts/register/$', 'main.views.register', name='register'),
     url(r'^marks/', 'main.views.marks', name='marks'),
+    url(r'^profile/$', 'main.views.profile', name='profile'),
     # url(r'^webapp/', include('webapp.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

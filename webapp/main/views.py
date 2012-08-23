@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response
 from django.template import loader, RequestContext
 from django.views.decorators.http import require_http_methods
 from django.core import serializers
-from models import Post
+from models import Post, UserProfile
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -17,13 +17,15 @@ from django.contrib.auth.forms import UserCreationForm
 # decorator 
 @login_required
 def home(request):
-	#posts = Post.objects.all()
-	posts = Post.objects.filter(user=request.user)
+	posts = Post.objects.all()
+	#posts = Post.objects.filter(user=request.user)
 	for p in posts:
 		print p.img.url
+	user_profiles = UserProfile.objects.all()
 	postsjson = serializers.serialize('json', posts)
+	userjson = serializers.serialize('json', user_profiles)
 	return render_to_response('wendy_template.html',
-                         dict(posts=postsjson),
+                         dict(posts=postsjson,users=userjson),
                          context_instance=RequestContext(request))
  	#return render_to_response('wendy_template.html', { 'content': content })
 
@@ -56,6 +58,16 @@ def register(request):
 	else:
 		form = UserCreationForm()
 	return render_to_response("registration/register.html", dict(form=form), 
+		context_instance=RequestContext(request))
+
+@login_required
+def profile(request):
+	posts = Post.objects.filter(user=request.user)
+	profile = request.user.get_profile()
+	if request.method == 'POST':
+		profile.img = request.FILES.get('avatar', False)
+		profile.save()
+	return render_to_response("profile/profile.html", dict(profile_img=profile.img), 
 		context_instance=RequestContext(request))
 
 # def user_login(request):
