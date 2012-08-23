@@ -67,7 +67,7 @@ def profile(request):
 	if request.method == 'POST':
 		profile.img = request.FILES.get('avatar', False)
 		profile.save()
-	return render_to_response("profile/profile.html", dict(profile_img=profile.img), 
+	return render_to_response("profile/profile.html", dict(profile_img=profile.img, posts=posts), 
 		context_instance=RequestContext(request))
 
 # def user_login(request):

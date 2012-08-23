@@ -1,14 +1,68 @@
-hello world
-<img src="/static/img/uploads/{{ profile_img }}">
-  <form action="{% url profile %}" method="post" enctype="multipart/form-data">
-  	{% csrf_token %}
-  	<table> 
-  	<tr>
-    	<td><label for="avatar">Avatar:</label></td>
-    	<td><input type="file" name="avatar" value="" id="avatar"></td>
-	</tr>
-	<tr>
-    	<td><input type="submit" value="Submit" /></td>
-	</tr>
-	</table> 
-  </form>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
+    <link rel="icon" type="image/png" href="/static/img/favicon_1.ico" />
+    <script type="text/javascript">
+    // javascript object notation communicates data between python and javascript 
+    // escapejs symbols are safe 
+    // list of dictionaries, each dictionary is a mark 
+    var marks = jQuery.parseJSON("{{ posts|escapejs }}");
+    var users = jQuery.parseJSON("{{ users|escapejs }}");
+    console.log(users);
+    </script>
+    <script type="text/javascript" src="/static/js/application.js"></script>
+
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <title>[geonote] leave your mark around the world</title>
+  </head>
+
+  <body>
+    <div class="wide">
+      <div class="center">
+        <div id="logo"><a href="{% url home %}"><img src="/static/img/logo-small.png"></a></div>
+        <div id="bigmap"><a id="ticker" href="#">ticker</a></div>
+        <div id="note"><a id="apostnote" href="#">note</a></div>
+        <div id="login">{% if user.is_authenticated %} 
+          <a href="{% url profile %}">{{ user.username }}</a>
+          {% else %}
+          not logged in
+          {% endif %} 
+        </div>
+        <div id="logout"> 
+          <a href="/accounts/logout/?next=/">logout</a> 
+        </div>
+        <div id="search"> 
+          <input type="text" id="address" value=""/><button onclick="search();">Search</button>
+        </div>
+      </div>
+    </div>
+    <div class="blue">
+      <div id="profile">
+        <h4> profile </h4>
+      <img src="/static/img/uploads/{{ profile_img }}">
+      <form action="{% url profile %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table> 
+        <tr>
+          <td><label for="avatar">Avatar:</label></td>
+          <td><input type="file" name="avatar" value="" id="avatar"></td>
+      </tr>
+      <tr>
+          <td><input type="submit" value="Submit" /></td>
+      </tr>
+      </table> 
+      </form>
+      </div>
+      <div id="profileposts">
+        <h4> your posts </h4>
+        {{ posts }} 
+      </div>
+    </div>
+    <div class="wide">
+      <div class="center">
+      </div>
+    </div>
+  </body>
+  
+</html>

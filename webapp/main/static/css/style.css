@@ -8,6 +8,7 @@ body {
   padding: 0;
   z-index: 1;
   font-family: Verdana, sans-serif;
+  background-color: #FFFAF0;
 }
 
 a:link {
@@ -48,6 +49,24 @@ a:active {color:#FFFFFF;}
   background: linear-gradient(to bottom, rgba(208,208,208,1) 0%,rgba(212,212,212,1) 12%,rgba(215,215,215,1) 25%,rgba(207,207,207,1) 39%,rgba(200,200,200,1) 50%,rgba(189,189,189,1) 51%,rgba(193,193,193,1) 60%,rgba(200,200,200,1) 76%,rgba(196,196,196,1) 91%,rgba(194,194,194,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d0d0', endColorstr='#c2c2c2',GradientType=0 ); /* IE6-9 */
 }
+
+.blue { 
+  width: 960px;
+  height: 88%;
+  margin: 5px auto 5px auto; 
+  background-color: #FFFAF0;
+}
+
+div#profilebox {
+  position: absolute;
+}
+div#profile{
+  position: absolute;
+}
+
+div#profileposts {
+  position: absolute;
+  left: 50%;
 }
 div#logo {
   width: 150px;
@@ -102,6 +121,12 @@ div#map_canvas {
   height: 90%;
   width: 100%;
 }
+
+div#profile {
+  height: 90%;
+  width: 100%;
+}
+
 div#lightbox {
   top: 50px;
   position: fixed;
