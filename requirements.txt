@@ -2,5 +2,5 @@ Django==1.4.1
 Markdown==2.2.0
 South==0.7.6
 geopy==0.94.2
-pymongo==2.2.1
+pymongo==2.5.2
 wsgiref==0.1.2
